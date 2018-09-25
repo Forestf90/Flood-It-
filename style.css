@@ -1,0 +1,25 @@
+.but {
+padding:20px;	
+margin-left:24px;
+	
+}
+
+#but1{
+	background-color:green;
+}
+
+#but2{
+	background-color:red;
+}
+
+#but3{
+	background-color:blue;
+}
+
+#but4{
+	background-color:yellow;
+}
+
+#but5{
+	background-color:orange;
+}
