@@ -4,6 +4,7 @@
 var ruchy =0;
 var plansza;
 var zaznaczeni;
+var win=false;
 
 function wypelnij(){
 	
@@ -32,11 +33,11 @@ function wypelnij(){
 };
 
 function rysuj(){
-	
+	//if(win) return;
 	c = document.getElementById("myCanvas");
 	ctx = c.getContext("2d");
 
-	
+	zwyciestwo();
 	for(var i=0 ;i< plansza.length ; i++){
 		
 		for(var j=0 ; j<plansza[i].length  ; j++){
@@ -79,9 +80,12 @@ function rysuj(){
 };
 
 function maluj(x){
-	if(x ==plansza[0][0]) return;
+	if(ruchy>50){
+	document.getElementById("wynik").innerHTML="Przegrales!";
+	}
+	if(x ==plansza[0][0] || win) return;
 	ruchy++;
-	document.getElementById("ruch").innerHTML ="Ruchy : "+ruchy;
+	document.getElementById("ruch").innerHTML ="Ruchy : "+ruchy+"/50";
 	
 	
 	 kolor= plansza[0][0];
@@ -134,6 +138,22 @@ function nastepny(x , y ,starykolor , nowykolor , do_pomalowania){
 	}
 }
 
+function zwyciestwo(){
+	if(ruchy>50) return;
+	var kol = plansza[0][0];
+
+		for(var i=plansza.length-1 ; i>0; i--){
+			for(var j=plansza.length-1 ; j>0 ;j--){
+				if(plansza[i][j]!=kol)return;
+				
+			}
+		}
+		
+		document.getElementById("wynik").innerHTML="Wygrales!";
+		win=true;
+	
+}
+
 window.onload = function main(){
 
 plansza = wypelnij();
@@ -141,4 +161,14 @@ plansza = wypelnij();
 rysuj(plansza);
 
 };
+
+function reset(){
+	win = false
+	ruchy=0;
+	document.getElementById("wynik").innerHTML="";
+	document.getElementById("ruch").innerHTML ="Ruchy : "+ruchy+"/50";
+	plansza = wypelnij();
+
+	rysuj(plansza);
+}
 
